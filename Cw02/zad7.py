@@ -23,5 +23,5 @@ print(lista)
 
 lista_kopia = lista
 
-
+lista_kopia.reverse()
 print(lista_kopia)
