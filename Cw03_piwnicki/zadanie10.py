@@ -1,0 +1,2 @@
+# W folderze projektu stwórz nowy virtualenv, a następnie zainstaluj moduł: https://github.com/yougov/chucknorris.
+# Stwórz nowy moduł chuck_norris w swoim projekcie i stwórz funkcję która podłączy się pod ściągnięty moduł.
