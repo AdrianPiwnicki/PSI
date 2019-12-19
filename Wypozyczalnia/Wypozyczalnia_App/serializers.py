@@ -1,4 +1,4 @@
-from .models import Klient, Samochód, Pracownik, Wypożyczanie
+from .models import Klient, Samochod, Pracownik, Wypozyczanie
 from rest_framework import serializers
 
 
@@ -10,7 +10,7 @@ class KlientSerializer(serializers.Serializer):
 
 class SamochodSerializer(serializers.Serializer):
     class Meta:
-        model = Samochód
+        model = Samochod
         fields = '__all__'
 
 
@@ -22,5 +22,5 @@ class PracownikSerializer(serializers.Serializer):
 
 class WypozyczanieSerializer(serializers.Serializer):
     class Meta:
-        model = Wypożyczanie
+        model = Wypozyczanie
         fields = '__all__'

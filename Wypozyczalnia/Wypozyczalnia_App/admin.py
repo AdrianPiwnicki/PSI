@@ -5,10 +5,10 @@ admin.site.register(Klient)
 from .models import Pracownik
 admin.site.register(Pracownik)
 
-from .models import Samochód
-admin.site.register(Samochód)
+from .models import Samochod
+admin.site.register(Samochod)
 
-from .models import Wypożyczanie
-admin.site.register(Wypożyczanie)
+from .models import Wypozyczanie
+admin.site.register(Wypozyczanie)
 
 # Register your models here.
