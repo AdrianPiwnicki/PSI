@@ -1,6 +1,5 @@
 # from Wypozyczalnia_App.models import *
 # from Wypozyczalnia_App.models import *
-from .permissions import IsOwnerOrReadOnly
 from .models import *
 from .serializers import *
 from rest_framework import generics, status, permissions
@@ -12,16 +11,14 @@ from rest_framework.decorators import api_view
 # from rest_framework import permissions
 
 
-
-
 class KlientList(generics.ListCreateAPIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, permissions.DjangoModelPermissionsOrAnonReadOnly]
     queryset = Klient.objects.all()
     serializer_class = KlientSerializer
 
 
 class KlientDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, permissions.DjangoModelPermissionsOrAnonReadOnly]
     queryset = Klient.objects.all()
     serializer_class = KlientSerializer
 

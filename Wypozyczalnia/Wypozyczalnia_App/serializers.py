@@ -2,7 +2,6 @@ from .models import Klient, Samochod, Pracownik, Wypozyczanie
 from rest_framework import serializers
 
 class KlientSerializer(serializers.Serializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
     PESEL = serializers.IntegerField(required=True)
     Imie = serializers.CharField(required=False, allow_blank=True, max_length=45)
     Nazwisko = serializers.CharField(required=False, allow_blank=True, max_length=45)

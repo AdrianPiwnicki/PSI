@@ -2,7 +2,6 @@ from django.db import models
 
 
 class Klient(models.Model):
-    owner = models.ForeignKey('auth.User', related_name='Klient', on_delete=models.CASCADE)
     PESEL = models.IntegerField(primary_key=True)
     Imie = models.CharField(max_length=45)
     Nazwisko = models.CharField(max_length=45)
