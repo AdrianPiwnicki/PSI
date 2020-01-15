@@ -1,8 +1,9 @@
 # from Wypozyczalnia_App.models import *
 # from Wypozyczalnia_App.models import *
+from .permissions import IsOwnerOrReadOnly
 from .models import *
 from .serializers import *
-from rest_framework import generics, status
+from rest_framework import generics, status, permissions
 from django.shortcuts import render
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.response import Response
@@ -14,22 +15,22 @@ from rest_framework.decorators import api_view
 
 
 class KlientList(generics.ListCreateAPIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     queryset = Klient.objects.all()
     serializer_class = KlientSerializer
 
 
-class KlientDetail(generics.RetrieveDestroyAPIView):
-    # permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+class KlientDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Klient.objects.all()
     serializer_class = KlientSerializer
-
 
 class SamochodList(generics.ListCreateAPIView):
     queryset = Samochod.objects.all()
     serializer_class = SamochodSerializer
 
 
-class SamochodDetail(generics.RetrieveDestroyAPIView):
+class SamochodDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Samochod.objects.all()
     serializer_class = SamochodSerializer
 
@@ -39,7 +40,7 @@ class PracownikList(generics.ListCreateAPIView):
     serializer_class = PracownikSerializer
 
 
-class PracownikDetail(generics.RetrieveDestroyAPIView):
+class PracownikDetail(generics.RetrieveAPIView):
     queryset = Pracownik.objects.all()
     serializer_class = PracownikSerializer
 

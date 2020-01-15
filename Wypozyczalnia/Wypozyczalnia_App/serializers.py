@@ -2,6 +2,7 @@ from .models import Klient, Samochod, Pracownik, Wypozyczanie
 from rest_framework import serializers
 
 class KlientSerializer(serializers.Serializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
     PESEL = serializers.IntegerField(required=True)
     Imie = serializers.CharField(required=False, allow_blank=True, max_length=45)
     Nazwisko = serializers.CharField(required=False, allow_blank=True, max_length=45)
@@ -12,7 +13,7 @@ class KlientSerializer(serializers.Serializer):
 
     def update(self, instance, validated_data):
         instance.Imie = validated_data.get('Imie', instance.Imie)
-        instance.Naziwsko = validated_data.get('Nazwisko', instance.Nazwisko)
+        instance.Nazwisko = validated_data.get('Nazwisko', instance.Nazwisko)
         instance.Numer_Prawa_Jazdy = validated_data.get('Numer_Prawa_Jazdy', instance.Numer_Prawa_Jazdy)
         instance.save()
         return instance
@@ -57,9 +58,9 @@ class PracownikSerializer(serializers.Serializer):
 
 class WypozyczanieSerializer(serializers.Serializer):
     idWypozyczanie = serializers.IntegerField(required=True)
-    Klient_PESEL = serializers.CharField()
-    Samochod_VIN = serializers.CharField()
-    Pracownik_idPracownika = serializers.IntegerField()
+    Klient_PESEL = serializers.PrimaryKeyRelatedField(queryset=Klient.objects.all())
+    Samochod_VIN = serializers.PrimaryKeyRelatedField(queryset=Samochod.objects.all())
+    Pracownik_idPracownika = serializers.PrimaryKeyRelatedField(queryset=Pracownik.objects.all())
     Data_rozpoczecia = serializers.DateField(required=False)
     Data_zakonczenia = serializers.DateField(required=False)
     Cena_za_wypozyczenie = serializers.FloatField(required=False)
