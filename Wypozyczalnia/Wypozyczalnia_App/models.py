@@ -6,6 +6,7 @@ class Klient(models.Model):
     Imie = models.CharField(max_length=45)
     Nazwisko = models.CharField(max_length=45)
     Numer_Prawa_Jazdy = models.CharField(max_length=13)
+    owner = models.ForeignKey('auth.User', related_name='Klient', on_delete=models.CASCADE)
     def __str__(self):
         return '%s %s %s %s' %(self.PESEL, self.Imie, self.Nazwisko, self.Numer_Prawa_Jazdy)
 
