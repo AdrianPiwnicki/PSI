@@ -1,5 +1,6 @@
-from .models import Klient, Samochod, Pracownik, Wypozyczanie
+from .models import *
 from rest_framework import serializers
+from django.contrib.auth.models import User
 
 
 
@@ -22,6 +23,7 @@ class KlientSerializer(serializers.Serializer):
 
 
 class SamochodSerializer(serializers.Serializer):
+    owner = serializers.ReadOnlyField(source='owner.uesrname')
     VIN = serializers.IntegerField(required=True)
     Marka = serializers.CharField(required=False, allow_blank=True, max_length=45)
     Model = serializers.CharField(required=False, allow_blank=True, max_length=45)
@@ -77,3 +79,11 @@ class WypozyczanieSerializer(serializers.Serializer):
         instance.Cena_za_wypozyczenie = validated_data.get('Cena_za_wypozyczenie', instance.Cena_za_wypozyczenie)
         instance.save()
         return instance
+
+
+class UserSerializer(serializers.ModelSerializer):
+    Druzyny = serializers.PrimaryKeyRelatedField(many=True, queryset=Klient.objects.all())
+    Wyniki = serializers.PrimaryKeyRelatedField(many=True, queryset=Samochod.objects.all())
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'Klient', 'Samochod']

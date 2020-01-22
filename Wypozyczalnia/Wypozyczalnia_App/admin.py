@@ -11,4 +11,3 @@ admin.site.register(Samochod)
 from .models import Wypozyczanie
 admin.site.register(Wypozyczanie)
 
-# Register your models here.

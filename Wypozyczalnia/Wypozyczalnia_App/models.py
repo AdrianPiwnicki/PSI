@@ -11,12 +11,14 @@ class Klient(models.Model):
         return '%s %s %s %s' %(self.PESEL, self.Imie, self.Nazwisko, self.Numer_Prawa_Jazdy)
 
 
+
 class Samochod(models.Model):
     VIN = models.CharField(primary_key=True, max_length=100)
     Marka = models.CharField(max_length=45)
     Model = models.CharField(max_length=45)
     Dostepnosc = models.IntegerField()
     CenaZaDobe = models.FloatField()
+    owner = models.ForeignKey('auth.User', related_name='Samochod', on_delete=models.CASCADE)
     def __str__(self):
         return '%s %s %s %s %s' % (self.VIN, self.Marka, self.Model, self.Dostepnosc, self.CenaZaDobe)
 

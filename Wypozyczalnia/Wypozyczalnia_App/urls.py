@@ -1,7 +1,6 @@
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
 from . import views
-from rest_framework import routers
 
 
 urlpatterns = [
@@ -13,6 +12,8 @@ urlpatterns = [
     path('Pracownik/<int:pk>/', views.PracownikDetail.as_view()),
     path('Wypozyczanie', views.WypozyczanieList.as_view()),
     path('Wypozyczanie/<int:pk>/', views.WypozyczanieDetail.as_view()),
+    path('users/', views.UserList.as_view()),
+    path('users/<int:pk>/', views.UserDetail.as_view()),
 
 ]
 
