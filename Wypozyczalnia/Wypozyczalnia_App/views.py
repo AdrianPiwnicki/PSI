@@ -54,10 +54,11 @@ class WypozyczanieDetail(generics.RetrieveDestroyAPIView):
     serializer_class = WypozyczanieSerializer
 
 class UserList(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-
 class UserDetail(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = User.objects.all()
     serializer_class = UserSerializer

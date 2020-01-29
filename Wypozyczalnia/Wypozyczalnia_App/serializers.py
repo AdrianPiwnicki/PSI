@@ -1,6 +1,7 @@
 from .models import *
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from rest_framework import permissions
 
 
 
@@ -82,8 +83,8 @@ class WypozyczanieSerializer(serializers.Serializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    Druzyny = serializers.PrimaryKeyRelatedField(many=True, queryset=Klient.objects.all())
-    Wyniki = serializers.PrimaryKeyRelatedField(many=True, queryset=Samochod.objects.all())
+    Klient = serializers.PrimaryKeyRelatedField(many=True, queryset=Klient.objects.all())
+    Samochod = serializers.PrimaryKeyRelatedField(many=True, queryset=Samochod.objects.all())
     class Meta:
         model = User
         fields = ['id', 'username', 'Klient', 'Samochod']
